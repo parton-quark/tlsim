@@ -1,9 +1,7 @@
-# loss_tolerance
+# tlsim
 
 Loss-error simulation for quantum error-correcting circuits, built on top of
-[tsim](https://github.com/QuEraComputing/tsim) (QuEra's GPU-accelerated,
-ZX-calculus-based circuit sampler, with an API that closely mirrors
-[stim](https://github.com/quantumlib/Stim)).
+[tsim](https://github.com/QuEraComputing/tsim).
 
 ## Structure
 
