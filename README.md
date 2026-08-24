@@ -5,14 +5,6 @@ Loss-error simulation for quantum error-correcting circuits, built on top of
 ZX-calculus-based circuit sampler, with an API that closely mirrors
 [stim](https://github.com/quantumlib/Stim)).
 
-The core idea: a lost qubit is modeled by **puncturing** — removing every CX
-gate that touches it — optionally dressed with Pauli noise on the surviving
-qubit of each removed CX, plus optional reload and LDU (Loss Detection Unit)
-noise. tsim is used instead of plain stim because loss puncturing routinely
-produces **non-deterministic ("gauge") detectors** (punctured stabilizer
-generators can anticommute), which `stim.Circuit.detector_error_model()`
-refuses to analyze but tsim's analytic ZX sampler handles natively.
-
 ## Structure
 
 ```
@@ -66,8 +58,7 @@ result = decode_ler_with_ldu(c_flat, loss_events=[(2, q_lost)], rounds=rounds, m
 print(result["logical_failure_rate"])
 ```
 
-See `src/tlsim/usage_example.ipynb` (or the English version,
-`usage_example_en.ipynb`) for a full walkthrough — all three noise levels,
+See `usage_example_en.ipynb` for a full walkthrough — all three noise levels,
 the non-deterministic-detector case that motivates using tsim, an
 LDU/reload comparison, and LER sweeps over code distance and physical error
 rate.
@@ -88,5 +79,4 @@ pytest src/tlsim/test_tlsim.py -v
   explain whenever puncturing produces gauge detectors — see the module
   docstring in `src/tlsim/decode.py` for details.
 - `src/union_find.py` wraps `ldpc.union_find_decoder.UnionFindDecoder`
-  (Delfosse–Nickerson Union-Find, generalized to general hypergraph PCMs) and
-  is the only dependency `tlsim` has outside its own package.
+  (Delfosse–Nickerson Union-Find, generalized to general hypergraph PCMs)
